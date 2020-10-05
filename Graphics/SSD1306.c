@@ -90,7 +90,7 @@ void OLED_UpdateDisplay(void) {
     I2C_Start();
     I2C_Write(slaveAddrW); // send the address
     
-    I2C_Write(0b11000000); // tell the display that its a continued data byte transmission
+    I2C_Write(0b01000000); // tell the display that its a continued data byte transmission
     
     // write the contents of the screen buffer to the display 
     for(y=0;y<4;y++) {
@@ -113,18 +113,18 @@ int OLED_SetAddr(int page, int column) {
     if(column>127||column<0||page>3||page<0) // if the function is sent an invalid column/page address
         return(OLED_OUTOFRANGE);            // return error
     
-    current_page=page;     // update current address variables
+    current_page=page;      // update current address variables
     current_column=column;
     
-    OLED_WriteCMD(0x21); // write new column address
-    OLED_WriteCMD(column);     //
-    OLED_WriteCMD(127); // the end column address will still be 127 though 
+    OLED_WriteCMD(0x21);    // write new column address
+    OLED_WriteCMD(column);  //
+    OLED_WriteCMD(127);     // the end column address will still be 127 though 
     
-    OLED_WriteCMD(0x22); // write the new page address
-    OLED_WriteCMD(page);       //
-    OLED_WriteCMD(3); // the end page address will still be 7 though
+    OLED_WriteCMD(0x22);    // write the new page address
+    OLED_WriteCMD(page);    //
+    OLED_WriteCMD(3);       // the end page address will still be 7 though
     
-    return(OLED_SUCCESS); // return success code 
+    return(OLED_SUCCESS);   // return success code 
 }
 
 

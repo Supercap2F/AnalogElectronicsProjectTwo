@@ -11,7 +11,7 @@
 
 // functions
 void I2C_Setup(void) {
-    I2CBRG = 272;         // baud rate
+    I2CBRG = 50;         // baud rate
     I2CCONbits.I2CEN = 1; // turn on the I2C module and release the lines
 }
 

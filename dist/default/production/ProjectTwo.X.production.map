@@ -16,9 +16,10 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33C/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/main.o \
-  build/default/production/I2C/I2C.o \
   build/default/production/Graphics/SSD1306.o \
+  build/default/production/I2C/I2C.o \
+  build/default/production/main.o \
+  build/default/production/Graphics/GDGL.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp30F3013.gld.00 \
   --stack=16 \
@@ -81,11 +82,11 @@ xc16-ld 1.35 (A)
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100                0xce           0x135  (309)
-.const                       0x1ce               0x200           0x300  (768)
-.text                        0x3ce               0x2fa           0x477  (1143)
-.dinit                       0x6c8                 0x8             0xc  (12)
+.const                       0x1ce               0x40e           0x615  (1557)
+.text                        0x5dc               0xb86          0x1149  (4425)
+.dinit                      0x1162                0x12            0x1b  (27)
 
-                 Total "program" memory used (bytes):          0x8b8  (2232) 9%
+                 Total "program" memory used (bytes):         0x18ae  (6318) 26%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -93,8 +94,9 @@ section                    address   length (PC units)   length (bytes) (dec)
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .nbss                        0x800                   0           0x204  (516)
+.ndata                       0xa04                   0             0x4  (4)
 
-                 Total "data" memory used (bytes):          0x204  (516) 25%
+                 Total "data" memory used (bytes):          0x208  (520) 25%
 
 
 Dynamic Memory Usage
@@ -102,9 +104,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xa04                               0x5fc  (1532)
+stack                        0xa08                               0x5f8  (1528)
 
-                 Maximum dynamic memory (bytes):          0x5fc  (1532)
+                 Maximum dynamic memory (bytes):          0x5f8  (1528)
 
 
 External Symbols in Data Memory (by address):
@@ -112,58 +114,100 @@ External Symbols in Data Memory (by address):
                     0x0800                  _current_page
                     0x0802                  _current_column
                     0x0804                  _ScrnBuff
+                    0x0a04                  _tsize
+                    0x0a06                  _txwrap
 
 External Symbols in Data Memory (by name):
 
                     0x0804                  _ScrnBuff
                     0x0802                  _current_column
                     0x0800                  _current_page
+                    0x0a04                  _tsize
+                    0x0a06                  _txwrap
 
 External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x00013c                  __psv_init
-                  0x000152                  __data_init_standard
                   0x000152                  __data_init
+                  0x000152                  __data_init_standard
                   0x0001c8                  __DefaultInterrupt
                   0x0001ce                  _test
-                  0x0003ce                  _PlotPoint
-                  0x000498                  _OLED_UpdateDisplay
-                  0x0004e2                  _updateScrnBuff
-                  0x0004fc                  _OLED_SetAddr
-                  0x000546                  _OLED_WriteCMD
-                  0x00055e                  _OLED_WriteDATA
-                  0x000576                  _OLED_Setup
-                  0x0005ec                  _OLED_ClearDisplay
-                  0x00062c                  _main
-                  0x000680                  _I2C_Setup
-                  0x00068c                  _I2C_Start
-                  0x00069e                  _I2C_Write
-                  0x0006b6                  _I2C_End
+                  0x000400                  _Dfont
+                  0x0005dc                  _PlotLine
+                  0x000678                  _PlotVLine
+                  0x0006ba                  _PlotHLine
+                  0x0006fa                  _PlotRectangle
+                  0x00073e                  _PlotTriangle
+                  0x000776                  _PlotCircleQuadrant
+                  0x00088e                  _PlotCircle
+                  0x00097e                  _PlotRoundedRect
+                  0x000a68                  _PlotFilledRectangle
+                  0x000a94                  _PlotRoundFilledSide
+                  0x000b6a                  _PlotFilledRoundedRect
+                  0x000c02                  _PlotFilledCircle
+                  0x000c4e                  _WriteChar
+                  0x000d24                  _WriteString
+                  0x000dfa                  _SetTextSize
+                  0x000e12                  _SetTextWrap
+                  0x000e28                  _PlotBitmap
+                  0x000e7c                  _GDGL_abs
+                  0x000e90                  _PlotPoint
+                  0x000f5a                  _OLED_UpdateDisplay
+                  0x000fa4                  _updateScrnBuff
+                  0x000fbe                  _OLED_SetAddr
+                  0x001008                  _OLED_WriteCMD
+                  0x001020                  _OLED_WriteDATA
+                  0x001038                  _OLED_Setup
+                  0x0010ae                  _OLED_ClearDisplay
+                  0x0010ee                  _I2C_Setup
+                  0x0010fa                  _I2C_Start
+                  0x00110c                  _I2C_Write
+                  0x001124                  _I2C_End
+                  0x001136                  _main
                   0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0006b6                  _I2C_End
-                  0x000680                  _I2C_Setup
-                  0x00068c                  _I2C_Start
-                  0x00069e                  _I2C_Write
-                  0x0005ec                  _OLED_ClearDisplay
-                  0x0004fc                  _OLED_SetAddr
-                  0x000576                  _OLED_Setup
-                  0x000498                  _OLED_UpdateDisplay
-                  0x000546                  _OLED_WriteCMD
-                  0x00055e                  _OLED_WriteDATA
-                  0x0003ce                  _PlotPoint
+                  0x000400                  _Dfont
+                  0x000e7c                  _GDGL_abs
+                  0x001124                  _I2C_End
+                  0x0010ee                  _I2C_Setup
+                  0x0010fa                  _I2C_Start
+                  0x00110c                  _I2C_Write
+                  0x0010ae                  _OLED_ClearDisplay
+                  0x000fbe                  _OLED_SetAddr
+                  0x001038                  _OLED_Setup
+                  0x000f5a                  _OLED_UpdateDisplay
+                  0x001008                  _OLED_WriteCMD
+                  0x001020                  _OLED_WriteDATA
+                  0x000e28                  _PlotBitmap
+                  0x00088e                  _PlotCircle
+                  0x000776                  _PlotCircleQuadrant
+                  0x000c02                  _PlotFilledCircle
+                  0x000a68                  _PlotFilledRectangle
+                  0x000b6a                  _PlotFilledRoundedRect
+                  0x0006ba                  _PlotHLine
+                  0x0005dc                  _PlotLine
+                  0x000e90                  _PlotPoint
+                  0x0006fa                  _PlotRectangle
+                  0x000a94                  _PlotRoundFilledSide
+                  0x00097e                  _PlotRoundedRect
+                  0x00073e                  _PlotTriangle
+                  0x000678                  _PlotVLine
+                  0x000dfa                  _SetTextSize
+                  0x000e12                  _SetTextWrap
+                  0x000c4e                  _WriteChar
+                  0x000d24                  _WriteString
                   0x0001c8                  __DefaultInterrupt
                   0xf8000a                  __FGS.sec
                   0x000152                  __data_init
                   0x000152                  __data_init_standard
                   0x00013c                  __psv_init
                   0x000100                  __resetPRI
-                  0x00062c                  _main
+                  0x001136                  _main
                   0x0001ce                  _test
-                  0x0004e2                  _updateScrnBuff
+                  0x000fa4                  _updateScrnBuff
 
 Memory Configuration
 
@@ -190,9 +234,10 @@ FICD             0xf8000c           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/main.o
-LOAD build/default/production/I2C/I2C.o
 LOAD build/default/production/Graphics/SSD1306.o
+LOAD build/default/production/I2C/I2C.o
+LOAD build/default/production/main.o
+LOAD build/default/production/Graphics/GDGL.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD p30F3013
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
@@ -277,7 +322,7 @@ __RESERVED2
 
 __FGS             0xf8000a          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf8000a          0x2 /CW/_FGS¨Ç
+ __FGS.sec        0xf8000a          0x2 /CW/_FGSøÄ¾
                   0xf8000a                  __FGS.sec
 
 __FICD
@@ -292,35 +337,40 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xba7
+.debug_info       0x000000       0x1638
  *(.debug_info)
- .debug_info      0x000000        0x2e7 build/default/production/main.o
- .debug_info      0x0002e7        0x52a build/default/production/I2C/I2C.o
- .debug_info      0x000811        0x396 build/default/production/Graphics/SSD1306.o
+ .debug_info      0x000000        0x396 build/default/production/Graphics/SSD1306.o
+ .debug_info      0x000396        0x52a build/default/production/I2C/I2C.o
+ .debug_info      0x0008c0        0x2ce build/default/production/main.o
+ .debug_info      0x000b8e        0xaaa build/default/production/Graphics/GDGL.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x248
+.debug_abbrev     0x000000        0x352
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xa7 build/default/production/main.o
- .debug_abbrev    0x0000a7         0xeb build/default/production/I2C/I2C.o
- .debug_abbrev    0x000192         0xb6 build/default/production/Graphics/SSD1306.o
+ .debug_abbrev    0x000000         0xb6 build/default/production/Graphics/SSD1306.o
+ .debug_abbrev    0x0000b6         0xeb build/default/production/I2C/I2C.o
+ .debug_abbrev    0x0001a1         0x94 build/default/production/main.o
+ .debug_abbrev    0x000235        0x11d build/default/production/Graphics/GDGL.o
 
-.debug_line       0x000000        0x2aa
+.debug_line       0x000000        0x419
  *(.debug_line)
- .debug_line      0x000000        0x10e build/default/production/main.o
- .debug_line      0x00010e         0xf5 build/default/production/I2C/I2C.o
- .debug_line      0x000203         0xa7 build/default/production/Graphics/SSD1306.o
+ .debug_line      0x000000         0xa7 build/default/production/Graphics/SSD1306.o
+ .debug_line      0x0000a7         0xf5 build/default/production/I2C/I2C.o
+ .debug_line      0x00019c        0x109 build/default/production/main.o
+ .debug_line      0x0002a5        0x174 build/default/production/Graphics/GDGL.o
 
-.debug_frame      0x000000        0x1a8
+.debug_frame      0x000000        0x3b4
  *(.debug_frame)
- .debug_frame     0x000000         0x30 build/default/production/main.o
- .debug_frame     0x000030         0x84 build/default/production/I2C/I2C.o
- .debug_frame     0x0000b4         0xf4 build/default/production/Graphics/SSD1306.o
+ .debug_frame     0x000000         0xf4 build/default/production/Graphics/SSD1306.o
+ .debug_frame     0x0000f4         0x84 build/default/production/I2C/I2C.o
+ .debug_frame     0x000178         0x30 build/default/production/main.o
+ .debug_frame     0x0001a8        0x20c build/default/production/Graphics/GDGL.o
 
-.debug_str        0x000000         0x3c
+.debug_str        0x000000         0x4c
  *(.debug_str)
- .debug_str       0x000000         0x17 build/default/production/I2C/I2C.o
- .debug_str       0x000017         0x25 build/default/production/Graphics/SSD1306.o
+ .debug_str       0x000000         0x25 build/default/production/Graphics/SSD1306.o
+ .debug_str       0x000025         0x17 build/default/production/I2C/I2C.o
+ .debug_str       0x00003c         0x10 build/default/production/Graphics/GDGL.o
 
 .debug_loc
  *(.debug_loc)
@@ -329,26 +379,30 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x142
+                  0x000000        0x2b2
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x24 build/default/production/main.o
+                  0x000000         0xd6 build/default/production/Graphics/SSD1306.o
  .debug_pubnames
-                  0x000024         0x48 build/default/production/I2C/I2C.o
+                  0x0000d6         0x48 build/default/production/I2C/I2C.o
  .debug_pubnames
-                  0x00006c         0xd6 build/default/production/Graphics/SSD1306.o
+                  0x00011e         0x24 build/default/production/main.o
+ .debug_pubnames
+                  0x000142        0x170 build/default/production/Graphics/GDGL.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x48
+.debug_aranges    0x000000         0x60
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/main.o
+                  0x000000         0x18 build/default/production/Graphics/SSD1306.o
  .debug_aranges
                   0x000018         0x18 build/default/production/I2C/I2C.o
  .debug_aranges
-                  0x000030         0x18 build/default/production/Graphics/SSD1306.o
+                  0x000030         0x18 build/default/production/main.o
+ .debug_aranges
+                  0x000048         0x18 build/default/production/Graphics/GDGL.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -741,37 +795,46 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
 OUTPUT(dist/default/production/ProjectTwo.X.production.elf elf32-pic30)
-LOAD /CW/_FGS¨Ç
+LOAD /CW/_FGSøÄ¾
 LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000048         0x94
+                  0x000060         0xa6
  .debug_pubtypes
-                  0x000048         0x1f build/default/production/main.o
+                  0x000060         0x12 build/default/production/Graphics/SSD1306.o
  .debug_pubtypes
-                  0x000067         0x63 build/default/production/I2C/I2C.o
+                  0x000072         0x63 build/default/production/I2C/I2C.o
  .debug_pubtypes
-                  0x0000ca         0x12 build/default/production/Graphics/SSD1306.o
+                  0x0000d5         0x1f build/default/production/main.o
+ .debug_pubtypes
+                  0x0000f4         0x12 build/default/production/Graphics/GDGL.o
 
 __c30_signature
-                  0x0000dc         0x1e
+                  0x000106         0x24
  __c30_signature
-                  0x0000dc          0x6 build/default/production/main.o
+                  0x000106          0x6 build/default/production/Graphics/SSD1306.o
  __c30_signature
-                  0x0000e2          0x6 build/default/production/I2C/I2C.o
+                  0x00010c          0x6 build/default/production/I2C/I2C.o
  __c30_signature
-                  0x0000e8          0x6 build/default/production/Graphics/SSD1306.o
+                  0x000112          0x6 build/default/production/main.o
  __c30_signature
-                  0x0000ee          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x000118          0x6 build/default/production/Graphics/GDGL.o
  __c30_signature
-                  0x0000f4          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x00011e          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x000124          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
 .nbss               0x0800        0x204
  .nbss              0x0800        0x204 build/default/production/Graphics/SSD1306.o
                     0x0800                  _current_page
                     0x0802                  _current_column
                     0x0804                  _ScrnBuff
+
+.ndata              0x0a04          0x4
+ .ndata             0x0a04          0x4 build/default/production/Graphics/GDGL.o
+                    0x0a04                  _tsize
+                    0x0a06                  _txwrap
 
 .config_ICS       0xf8000c          0x2
  .config_ICS      0xf8000c          0x2 build/default/production/main.o
@@ -787,27 +850,48 @@ __c30_signature
  .config_FCKSMEN
                   0xf80000          0x2 build/default/production/main.o
 
-.const              0x81ce        0x200 load address 0x0001ce  
- .const             0x81ce        0x200 build/default/production/main.o
+.const              0x81ce        0x40e load address 0x0001ce  
+ .const             0x81ce        0x232 build/default/production/main.o
                     0x81ce                  _test
+ .const             0x8400        0x1dc build/default/production/Graphics/GDGL.o
+                    0x8400                  _Dfont
 
-.text             0x0003ce        0x2fa
- .text            0x0003ce        0x25e build/default/production/Graphics/SSD1306.o
-                  0x0003ce                  _PlotPoint
-                  0x000498                  _OLED_UpdateDisplay
-                  0x0004e2                  _updateScrnBuff
-                  0x0004fc                  _OLED_SetAddr
-                  0x000546                  _OLED_WriteCMD
-                  0x00055e                  _OLED_WriteDATA
-                  0x000576                  _OLED_Setup
-                  0x0005ec                  _OLED_ClearDisplay
- .text            0x00062c         0x54 build/default/production/main.o
-                  0x00062c                  _main
- .text            0x000680         0x48 build/default/production/I2C/I2C.o
-                  0x000680                  _I2C_Setup
-                  0x00068c                  _I2C_Start
-                  0x00069e                  _I2C_Write
-                  0x0006b6                  _I2C_End
+.text             0x0005dc        0xb86
+ .text            0x0005dc        0x8b4 build/default/production/Graphics/GDGL.o
+                  0x0005dc                  _PlotLine
+                  0x000678                  _PlotVLine
+                  0x0006ba                  _PlotHLine
+                  0x0006fa                  _PlotRectangle
+                  0x00073e                  _PlotTriangle
+                  0x000776                  _PlotCircleQuadrant
+                  0x00088e                  _PlotCircle
+                  0x00097e                  _PlotRoundedRect
+                  0x000a68                  _PlotFilledRectangle
+                  0x000a94                  _PlotRoundFilledSide
+                  0x000b6a                  _PlotFilledRoundedRect
+                  0x000c02                  _PlotFilledCircle
+                  0x000c4e                  _WriteChar
+                  0x000d24                  _WriteString
+                  0x000dfa                  _SetTextSize
+                  0x000e12                  _SetTextWrap
+                  0x000e28                  _PlotBitmap
+                  0x000e7c                  _GDGL_abs
+ .text            0x000e90        0x25e build/default/production/Graphics/SSD1306.o
+                  0x000e90                  _PlotPoint
+                  0x000f5a                  _OLED_UpdateDisplay
+                  0x000fa4                  _updateScrnBuff
+                  0x000fbe                  _OLED_SetAddr
+                  0x001008                  _OLED_WriteCMD
+                  0x001020                  _OLED_WriteDATA
+                  0x001038                  _OLED_Setup
+                  0x0010ae                  _OLED_ClearDisplay
+ .text            0x0010ee         0x48 build/default/production/I2C/I2C.o
+                  0x0010ee                  _I2C_Setup
+                  0x0010fa                  _I2C_Start
+                  0x00110c                  _I2C_Write
+                  0x001124                  _I2C_End
+ .text            0x001136         0x2c build/default/production/main.o
+                  0x001136                  _main
 
-.dinit            0x0006c8          0x8
- .dinit           0x0006c8          0x8 data_init
+.dinit            0x001162         0x12
+ .dinit           0x001162         0x12 data_init

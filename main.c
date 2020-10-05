@@ -4,12 +4,12 @@
  *
  * Created on September 28, 2020, 4:16 PM
  */
-#pragma config FOSFPR = FRC       // Oscillator (Internal Fast RC (No change to Primary Osc Mode bits))
+#pragma config FOSFPR = FRC_PLL8       // Oscillator (Internal Fast RC (No change to Primary Osc Mode bits))
 #pragma config FCKSMEN = CSW_FSCM_OFF   // Clock Switching and Monitor (Sw Disabled, Mon Disabled)
 // FWDT
 #pragma config FWPSB = WDTPSB_16        // WDT Prescaler B (1:16)
 #pragma config FWPSA = WDTPSA_512       // WDT Prescaler A (1:512)
-#pragma config WDT = WDT_ON             // Watchdog Timer (Enabled)
+#pragma config WDT = WDT_OFF             // Watchdog Timer (Enabled)
 // FBORPOR
 #pragma config FPWRT = PWRT_64          // POR Timer Value (64ms)
 #pragma config BODENV = BORV20          // Brown Out Voltage (Reserved)
@@ -26,7 +26,7 @@
 #include "I2C\I2C.h"
 #include "Graphics\SSD1306.h"
 #include "Graphics\test.h"
-//#include "Fonts\CherryCremeSodaFont.h"
+#include "Graphics\GDGL.h"
 /***********************************************
  * Definitions                                 *
  ***********************************************/
@@ -74,22 +74,21 @@ int main(void) {
    
     I2C_Setup();
     OLED_Setup();
-    
     OLED_ClearDisplay();
+    
+    // load the screen buffer with the image 
+    /*
     for(y=0;y<4;y++) {
         for(x=0;x<128;x++) {
-            updateScrnBuff(test[x*y],x,y);
+            updateScrnBuff(test[x + (y * 128)],x,y);
         }
-    }
+    } */
+
+    
+    WriteString(0, 0, "FUCK MAHER HE GIVES ME TOO MUCH WORK DIE DIE DIE", ON, OFF);
+    
     OLED_UpdateDisplay();
     
-    /*
-    OLED_SetAddr(0,0);
-    for(x=0;x<512;x++) {
-            OLED_WriteDATA(dick[x]);
-    }
-    OLED_SetAddr(0,0);       
-    */  
-            
+
     while(1);
 }
