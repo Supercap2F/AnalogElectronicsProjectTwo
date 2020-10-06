@@ -84,8 +84,9 @@ int main(void) {
         }
     } */
 
-    
-    WriteString(0, 0, "FUCK MAHER HE GIVES ME TOO MUCH WORK DIE DIE DIE", ON, OFF);
+    SetTextSize(2);
+    PlotRectangle(0, 0, 128, 32, ON);
+    WriteString(16, 8, "39.8 31.4", ON, OFF);
     
     OLED_UpdateDisplay();
     

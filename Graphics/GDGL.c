@@ -39,6 +39,7 @@
 #include "GDGL.h"
 #include "SSD1306.h" // header file for display driver
 #include "..\Fonts\DefaultFont.h"   // the default font file
+#include "..\Fonts\CherryCremeSodaFont.h"
 
 /************************************************
  * Global Variables                             *
@@ -371,6 +372,52 @@ int WriteString(int x0, int y0, char *string, int color, int backcolor){
     }
     return(GDGL_SUCCESS); // return success code 
 }
+
+/*
+
+int WriteDigit(int x0, int y0, char *number, int color, int backcolor) {
+    int x,y,ySize,xSize;
+    unsigned char mask;
+    char characterArray[];
+    int charWidth = 0;
+    
+    if(number<0x30||number>0x39) // if function is sent a ASCII character it can't print
+        return(GDGL_OUTOFRANGE); // return Out of Range error 
+    number-=0x30;                // subtract unused ASCII characters so variable  
+                                 // 'letter' can be used for an arrays value
+    
+    // grab the proper digit address
+    characterArray = char_addr[number];
+    
+    // grab the width of the character
+    charWidth = char_width[number];
+    
+    
+    for(x = x0; x < (charWidth+x0); x++ ) {
+        for(y = y0; y < (32+y0); y++) {
+            PlotPoint(x0, y0, )
+            
+            
+            
+        }
+    }
+    
+    / *
+    for(x=x0;x<(5*tsize)+x0;x+=tsize){           // Please don't try to understand this - just accept it. 
+        mask=1;                                  // reset mask variable 
+        for(y=y0;y<(8*tsize)+y0;y=y+tsize){      //
+            for(xSize=0;xSize<tsize;xSize++)     // 
+                for(ySize=0;ySize<tsize;ySize++) // 
+                    
+                    PlotPoint(x+xSize,y+ySize,((Dfont[number][((x-x0)/tsize)] & mask) ? color:backcolor));
+            mask<<=1;                            // shift the mask left 1 bit
+        }
+    }* /
+    return(GDGL_SUCCESS);
+}*/
+
+
+
 /************************************************
  * SetTextSize Function - sets the current      *
  * text size.                                   *

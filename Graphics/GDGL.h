@@ -39,6 +39,7 @@ int WriteChar(int x0, int y0, unsigned char letter, int color, int backcolor);
 int WriteString(int x0, int y0, char *string, int color, int backcolor);
 int SetTextSize(int Tx_size);
 void SetTextWrap(char Tx_wrap);
+int WriteDigit(int x0, int y0, char *number, int color, int backcolor);
 
 /* Bitmap Functions: */
 void PlotBitmap(int x0, int y0, int w, int h, const unsigned short *image);
