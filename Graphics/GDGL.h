@@ -47,6 +47,7 @@ void PlotBitmap(int x0, int y0, int w, int h, const unsigned short *image);
 /* Support Functions: */
 int GDGL_abs(int num);
 
+
 #endif	/* INC_OLED_H */
 
 

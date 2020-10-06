@@ -201,10 +201,10 @@ void OLED_Setup(void) {
 void OLED_ClearDisplay(void) {
     int x,y;
     
-    OLED_SetAddr(0,0);
+    //OLED_SetAddr(0,0);
     for(y=0;y<4;y++) {
         for(x=0;x<128;x++) {
-            OLED_WriteDATA(0x00);
+            //OLED_WriteDATA(0x00);
             ScrnBuff[y][x]=0x00;
         }
     }

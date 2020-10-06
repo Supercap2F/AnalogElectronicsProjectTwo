@@ -27,13 +27,23 @@
 #include "Graphics\SSD1306.h"
 #include "Graphics\test.h"
 #include "Graphics\GDGL.h"
+#include "ADC\ADC.h"
+
+#define FCY 60000000UL    // Instruction cycle frequency, Hz - required for __delayXXX() to work
+#include <libpic30.h>        // __delayXXX() functions macros defined here
+#include "Graphics\numberConverter.h"
+
 /***********************************************
  * Definitions                                 *
  ***********************************************/
 // NOTE: the pins that the interface to the LCD are defined in the LCD driver file 
 
 int main(void) {
-    int x,y;
+    unsigned int rint =0;
+    unsigned int r1, r2, r3, r4, sel1, sel2;
+    double rat = 0;
+    double result;
+    char charResult[20];
     /***********************************************
      * oscillator configuration                    *
      ***********************************************/
@@ -76,20 +86,77 @@ int main(void) {
     OLED_Setup();
     OLED_ClearDisplay();
     
-    // load the screen buffer with the image 
+    SetTextSize(1);
+    OLED_UpdateDisplay(); 
+    
     /*
-    for(y=0;y<4;y++) {
-        for(x=0;x<128;x++) {
-            updateScrnBuff(test[x + (y * 128)],x,y);
+    while(1) {
+        rint = (unsigned int) readADC(0);
+        intToStr(rint, charResult, 1);
+        WriteString(2, 12, "int: ", ON, OFF);
+        WriteString(32, 12, charResult, ON, OFF);
+        
+        
+        result = rint / (4095.0);
+        ftoa(result, charResult , 3);
+        WriteString(2, 2, "flt: ", ON, OFF);
+        WriteString(32, 2, charResult , ON, OFF);
+    
+        
+        OLED_UpdateDisplay();  
+        OLED_ClearDisplay();
+        
+        __delay_ms(100);
+    }*/
+    
+    
+    while(1) {
+        // get values from the ADC
+        r1 = (unsigned int) readADC(0);
+        r2 = (unsigned int) readADC(1);
+        r3 = (unsigned int) readADC(2);
+        r4 = (unsigned int) readADC(3);
+        
+        if(r1 > r3) {
+            if(r2 > r4) {
+                sel2 = r2;
+                rat = 0;
+            } else {
+                sel2 = r4;
+                rat = 270;
+            }
+            sel1 = r1;
+        }else {
+            if(r2 > r4) {
+                sel2 = r2;
+                rat = 90;
+            } else {
+                sel2 = r4;
+                rat = 180;
+            }
+            sel1 = r3;
         }
-    } */
-
-    SetTextSize(2);
-    PlotRectangle(0, 0, 128, 32, ON);
-    WriteString(16, 8, "39.8 31.4", ON, OFF);
+        
+        result = (((double) sel1/sel2) * 90) + rat;
+        ftoa(result, charResult , 3);
+        WriteString(2, 2, "angle: ", ON, OFF);
+        WriteString(50, 2, charResult , ON, OFF);
+        PlotCircle(95, 2, 2, ON);
+        //WriteString(93, 2, "deg", ON,OFF);
+        
+        
+        OLED_UpdateDisplay();  
+        OLED_ClearDisplay();
+        __delay_ms(100);
+    }
     
-    OLED_UpdateDisplay();
     
-
-    while(1);
+    
+    
+    
+    
+    
+    
+    
 }
+

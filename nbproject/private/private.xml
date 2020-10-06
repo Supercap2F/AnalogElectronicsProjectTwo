@@ -3,13 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/test.h</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/I2C/I2C.c</file>
             <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Fonts/CherryCremeSodaFont.h</file>
-            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/SSD1306.c</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/ADC/ADC.c</file>
             <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/main.c</file>
-            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/dick.h</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/ADC/ADC.h</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/GDGL.h</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/GDGL.c</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/numberConverter.c</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/SSD1306.c</file>
             <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/SSD1306.h</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Graphics/numberConverter.h</file>
             <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/I2C/I2C.h</file>
+            <file>file:/C:/Users/super/Documents/School/OC/2020-2%20Fall/Analog%20Electronics/Projects/ProjectTwo/ProjectTwo.X/Fonts/DefaultFont.h</file>
         </group>
     </open-files>
 </project-private>

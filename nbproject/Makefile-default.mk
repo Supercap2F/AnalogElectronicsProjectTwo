@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Graphics/SSD1306.c I2C/I2C.c main.c Graphics/GDGL.c
+SOURCEFILES_QUOTED_IF_SPACED=ADC/ADC.c Graphics/SSD1306.c Graphics/GDGL.c I2C/I2C.c main.c Graphics/numberConverter.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Graphics/SSD1306.o ${OBJECTDIR}/I2C/I2C.o ${OBJECTDIR}/main.o ${OBJECTDIR}/Graphics/GDGL.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Graphics/SSD1306.o.d ${OBJECTDIR}/I2C/I2C.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/Graphics/GDGL.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC/ADC.o ${OBJECTDIR}/Graphics/SSD1306.o ${OBJECTDIR}/Graphics/GDGL.o ${OBJECTDIR}/I2C/I2C.o ${OBJECTDIR}/main.o ${OBJECTDIR}/Graphics/numberConverter.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ADC/ADC.o.d ${OBJECTDIR}/Graphics/SSD1306.o.d ${OBJECTDIR}/Graphics/GDGL.o.d ${OBJECTDIR}/I2C/I2C.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/Graphics/numberConverter.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Graphics/SSD1306.o ${OBJECTDIR}/I2C/I2C.o ${OBJECTDIR}/main.o ${OBJECTDIR}/Graphics/GDGL.o
+OBJECTFILES=${OBJECTDIR}/ADC/ADC.o ${OBJECTDIR}/Graphics/SSD1306.o ${OBJECTDIR}/Graphics/GDGL.o ${OBJECTDIR}/I2C/I2C.o ${OBJECTDIR}/main.o ${OBJECTDIR}/Graphics/numberConverter.o
 
 # Source Files
-SOURCEFILES=Graphics/SSD1306.c I2C/I2C.c main.c Graphics/GDGL.c
+SOURCEFILES=ADC/ADC.c Graphics/SSD1306.c Graphics/GDGL.c I2C/I2C.c main.c Graphics/numberConverter.c
 
 
 CFLAGS=
@@ -94,12 +94,26 @@ MP_LINKER_FILE_OPTION=,--script=p30F3013.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/ADC/ADC.o: ADC/ADC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/ADC" 
+	@${RM} ${OBJECTDIR}/ADC/ADC.o.d 
+	@${RM} ${OBJECTDIR}/ADC/ADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ADC/ADC.c  -o ${OBJECTDIR}/ADC/ADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ADC/ADC.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/ADC/ADC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/Graphics/SSD1306.o: Graphics/SSD1306.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/Graphics" 
 	@${RM} ${OBJECTDIR}/Graphics/SSD1306.o.d 
 	@${RM} ${OBJECTDIR}/Graphics/SSD1306.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/SSD1306.c  -o ${OBJECTDIR}/Graphics/SSD1306.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/SSD1306.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Graphics/SSD1306.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/Graphics/GDGL.o: Graphics/GDGL.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/Graphics" 
+	@${RM} ${OBJECTDIR}/Graphics/GDGL.o.d 
+	@${RM} ${OBJECTDIR}/Graphics/GDGL.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/GDGL.c  -o ${OBJECTDIR}/Graphics/GDGL.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/GDGL.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Graphics/GDGL.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/I2C/I2C.o: I2C/I2C.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/I2C" 
@@ -115,20 +129,34 @@ ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/Graphics/GDGL.o: Graphics/GDGL.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/Graphics/numberConverter.o: Graphics/numberConverter.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/Graphics" 
-	@${RM} ${OBJECTDIR}/Graphics/GDGL.o.d 
-	@${RM} ${OBJECTDIR}/Graphics/GDGL.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/GDGL.c  -o ${OBJECTDIR}/Graphics/GDGL.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/GDGL.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/Graphics/GDGL.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/Graphics/numberConverter.o.d 
+	@${RM} ${OBJECTDIR}/Graphics/numberConverter.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/numberConverter.c  -o ${OBJECTDIR}/Graphics/numberConverter.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/numberConverter.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Graphics/numberConverter.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
+${OBJECTDIR}/ADC/ADC.o: ADC/ADC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/ADC" 
+	@${RM} ${OBJECTDIR}/ADC/ADC.o.d 
+	@${RM} ${OBJECTDIR}/ADC/ADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ADC/ADC.c  -o ${OBJECTDIR}/ADC/ADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ADC/ADC.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/ADC/ADC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/Graphics/SSD1306.o: Graphics/SSD1306.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/Graphics" 
 	@${RM} ${OBJECTDIR}/Graphics/SSD1306.o.d 
 	@${RM} ${OBJECTDIR}/Graphics/SSD1306.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/SSD1306.c  -o ${OBJECTDIR}/Graphics/SSD1306.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/SSD1306.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Graphics/SSD1306.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/Graphics/GDGL.o: Graphics/GDGL.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/Graphics" 
+	@${RM} ${OBJECTDIR}/Graphics/GDGL.o.d 
+	@${RM} ${OBJECTDIR}/Graphics/GDGL.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/GDGL.c  -o ${OBJECTDIR}/Graphics/GDGL.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/GDGL.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Graphics/GDGL.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/I2C/I2C.o: I2C/I2C.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/I2C" 
@@ -144,12 +172,12 @@ ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/Graphics/GDGL.o: Graphics/GDGL.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/Graphics/numberConverter.o: Graphics/numberConverter.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/Graphics" 
-	@${RM} ${OBJECTDIR}/Graphics/GDGL.o.d 
-	@${RM} ${OBJECTDIR}/Graphics/GDGL.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/GDGL.c  -o ${OBJECTDIR}/Graphics/GDGL.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/GDGL.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/Graphics/GDGL.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/Graphics/numberConverter.o.d 
+	@${RM} ${OBJECTDIR}/Graphics/numberConverter.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Graphics/numberConverter.c  -o ${OBJECTDIR}/Graphics/numberConverter.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Graphics/numberConverter.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Graphics/numberConverter.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
