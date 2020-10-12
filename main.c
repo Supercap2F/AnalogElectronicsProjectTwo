@@ -112,32 +112,38 @@ int main(void) {
     
     while(1) {
         // get values from the ADC
-        r1 = (unsigned int) readADC(0);
-        r2 = (unsigned int) readADC(1);
-        r3 = (unsigned int) readADC(2);
-        r4 = (unsigned int) readADC(3);
+        r1 = (unsigned int) readADC(0); // get the value from the top resistor
+        r2 = (unsigned int) readADC(1); // get the value from the right resistor
+        r3 = (unsigned int) readADC(2); // get the value from the bottom resistor
+        r4 = (unsigned int) readADC(3); // get the value from the left resistor 
         
         if(r1 > r3) {
             if(r2 > r4) {
-                sel2 = r2;
+                sel2 = r1;
+                sel1 = r2;
                 rat = 0;
             } else {
                 sel2 = r4;
+                sel1 = r1;
                 rat = 270;
             }
-            sel1 = r1;
+            
         }else {
             if(r2 > r4) {
                 sel2 = r2;
+                sel1 = r3;
                 rat = 90;
             } else {
                 sel2 = r4;
+                sel1 = r3;
                 rat = 180;
             }
-            sel1 = r3;
         }
         
-        result = (((double) sel1/sel2) * 90) + rat;
+        // calculate angle 
+        result = (((double) sel1/sel2) * 45) + rat;
+        
+        
         ftoa(result, charResult , 3);
         WriteString(2, 2, "angle: ", ON, OFF);
         WriteString(50, 2, charResult , ON, OFF);

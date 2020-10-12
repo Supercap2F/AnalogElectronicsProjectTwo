@@ -133,10 +133,10 @@ section                    address   length (PC units)   length (bytes) (dec)
 .const                       0x908               0x3e4           0x5d6  (1494)
 .text                        0xcec               0x8b4           0xd0e  (3342)
 .dinit                      0x15a0               0x26c           0x3a2  (930)
-.text                       0x180c               0x592           0x85b  (2139)
-.init.delay32               0x1d9e                0x1c            0x2a  (42)
+.text                       0x180c               0x59a           0x867  (2151)
+.init.delay32               0x1da6                0x1c            0x2a  (42)
 
-                 Total "program" memory used (bytes):         0x2b17  (11031) 45%
+                 Total "program" memory used (bytes):         0x2b23  (11043) 45%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -266,22 +266,22 @@ External Symbols in Program Memory (by address):
                   0x001b14                  _ftoa
                   0x001b8a                  _reverseBits
                   0x001bce                  _main
-                  0x001cc8                  _readADC
-                  0x001d56                  _I2C_Setup
-                  0x001d62                  _I2C_Start
-                  0x001d74                  _I2C_Write
-                  0x001d8c                  _I2C_End
-                  0x001d9e                  ___delay32
+                  0x001cd0                  _readADC
+                  0x001d5e                  _I2C_Setup
+                  0x001d6a                  _I2C_Start
+                  0x001d7c                  _I2C_Write
+                  0x001d94                  _I2C_End
+                  0x001da6                  ___delay32
                   0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
                   0x000b10                  _Dfont
                   0x00158c                  _GDGL_abs
-                  0x001d8c                  _I2C_End
-                  0x001d56                  _I2C_Setup
-                  0x001d62                  _I2C_Start
-                  0x001d74                  _I2C_Write
+                  0x001d94                  _I2C_End
+                  0x001d5e                  _I2C_Setup
+                  0x001d6a                  _I2C_Start
+                  0x001d7c                  _I2C_Write
                   0x001a2a                  _OLED_ClearDisplay
                   0x00193a                  _OLED_SetAddr
                   0x0019b4                  _OLED_Setup
@@ -309,7 +309,7 @@ External Symbols in Program Memory (by name):
                   0x0001c8                  __DefaultInterrupt
                   0xf8000a                  __FGS.sec
                   0x0001d0                  ___addsf3
-                  0x001d9e                  ___delay32
+                  0x001da6                  ___delay32
                   0x00028a                  ___divsf3
                   0x00075a                  ___eqsf2
                   0x00030e                  ___fixsfsi
@@ -343,7 +343,7 @@ External Symbols in Program Memory (by name):
                   0x000824                  _logf
                   0x001bce                  _main
                   0x000468                  _powf
-                  0x001cc8                  _readADC
+                  0x001cd0                  _readADC
                   0x001a60                  _reverse
                   0x001b8a                  _reverseBits
                   0x000908                  _test
@@ -523,7 +523,7 @@ __RESERVED2
 
 __FGS             0xf8000a          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf8000a          0x2 /CW/_FGS8Çó
+ __FGS.sec        0xf8000a          0x2 /CW/_FGS°&ð
                   0xf8000a                  __FGS.sec
 
 __FICD
@@ -557,14 +557,14 @@ userdata
  .debug_abbrev    0x0003a5         0x9f build/default/production/main.o
  .debug_abbrev    0x000444         0x8d build/default/production/Graphics/numberConverter.o
 
-.debug_line       0x000000        0x5cc
+.debug_line       0x000000        0x5ce
  *(.debug_line)
  .debug_line      0x000000        0x10a build/default/production/ADC/ADC.o
  .debug_line      0x00010a         0xa5 build/default/production/Graphics/SSD1306.o
  .debug_line      0x0001af        0x18f build/default/production/Graphics/GDGL.o
  .debug_line      0x00033e         0xf5 build/default/production/I2C/I2C.o
- .debug_line      0x000433        0x127 build/default/production/main.o
- .debug_line      0x00055a         0x72 build/default/production/Graphics/numberConverter.o
+ .debug_line      0x000433        0x129 build/default/production/main.o
+ .debug_line      0x00055c         0x72 build/default/production/Graphics/numberConverter.o
 
 .debug_frame      0x000000        0x474
  *(.debug_frame)
@@ -1013,7 +1013,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
 OUTPUT(dist/default/production/ProjectTwo.X.production.elf elf32-pic30)
-LOAD /CW/_FGS8Çó
+LOAD /CW/_FGS°&ð
 LOAD default_isr
 LOAD data_init
 
@@ -1164,7 +1164,7 @@ __c30_signature
 .dinit            0x0015a0        0x26c
  .dinit           0x0015a0        0x26c data_init
 
-.text             0x00180c        0x592
+.text             0x00180c        0x59a
  .text            0x00180c        0x254 build/default/production/Graphics/SSD1306.o
                   0x00180c                  _PlotPoint
                   0x0018d6                  _OLED_UpdateDisplay
@@ -1179,16 +1179,16 @@ __c30_signature
                   0x001aae                  _intToStr
                   0x001b14                  _ftoa
                   0x001b8a                  _reverseBits
- .text            0x001bce         0xfa build/default/production/main.o
+ .text            0x001bce        0x102 build/default/production/main.o
                   0x001bce                  _main
- .text            0x001cc8         0x8e build/default/production/ADC/ADC.o
-                  0x001cc8                  _readADC
- .text            0x001d56         0x48 build/default/production/I2C/I2C.o
-                  0x001d56                  _I2C_Setup
-                  0x001d62                  _I2C_Start
-                  0x001d74                  _I2C_Write
-                  0x001d8c                  _I2C_End
+ .text            0x001cd0         0x8e build/default/production/ADC/ADC.o
+                  0x001cd0                  _readADC
+ .text            0x001d5e         0x48 build/default/production/I2C/I2C.o
+                  0x001d5e                  _I2C_Setup
+                  0x001d6a                  _I2C_Start
+                  0x001d7c                  _I2C_Write
+                  0x001d94                  _I2C_End
 
-.init.delay32     0x001d9e         0x1c
- .init.delay32    0x001d9e         0x1c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
-                  0x001d9e                  ___delay32
+.init.delay32     0x001da6         0x1c
+ .init.delay32    0x001da6         0x1c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(delay32.Leo)
+                  0x001da6                  ___delay32
