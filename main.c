@@ -9,11 +9,11 @@
 // FWDT
 #pragma config FWPSB = WDTPSB_16        // WDT Prescaler B (1:16)
 #pragma config FWPSA = WDTPSA_512       // WDT Prescaler A (1:512)
-#pragma config WDT = WDT_OFF             // Watchdog Timer (Enabled)
+#pragma config WDT = WDT_OFF             // Watchdog Timer (disabled)
 // FBORPOR
 #pragma config FPWRT = PWRT_64          // POR Timer Value (64ms)
 #pragma config BODENV = BORV20          // Brown Out Voltage (Reserved)
-#pragma config BOREN = PBOR_ON          // PBOR Enable (Enabled)
+#pragma config BOREN = PBOR_OFF          // PBOR Enable (Enabled)
 #pragma config MCLRE = MCLR_EN          // Master Clear Enable (Enabled)
 // FGS
 #pragma config GWRP = GWRP_OFF          // General Code Segment Write Protect (Disabled)
@@ -39,11 +39,22 @@
 // NOTE: the pins that the interface to the LCD are defined in the LCD driver file 
 
 int main(void) {
-    unsigned int rint =0;
-    unsigned int r1, r2, r3, r4, sel1, sel2;
+    unsigned int sel1, sel2;
     double rat = 0;
     double result;
     char charResult[20];
+    int x;
+    
+    int highest = 0;
+    int low,high;
+    unsigned int values[11];
+    
+    double elevation = 0;
+    double eleangle = 0;
+    
+    int extraspace = 0;
+    
+    int plusFlag = 0;
     /***********************************************
      * oscillator configuration                    *
      ***********************************************/
@@ -89,80 +100,94 @@ int main(void) {
     SetTextSize(1);
     OLED_UpdateDisplay(); 
     
-    /*
-    while(1) {
-        rint = (unsigned int) readADC(0);
-        intToStr(rint, charResult, 1);
-        WriteString(2, 12, "int: ", ON, OFF);
-        WriteString(32, 12, charResult, ON, OFF);
-        
-        
-        result = rint / (4095.0);
-        ftoa(result, charResult , 3);
-        WriteString(2, 2, "flt: ", ON, OFF);
-        WriteString(32, 2, charResult , ON, OFF);
-    
-        
-        OLED_UpdateDisplay();  
-        OLED_ClearDisplay();
-        
-        __delay_ms(100);
-    }*/
-    
     
     while(1) {
         // get values from the ADC
-        r1 = (unsigned int) readADC(0); // get the value from the top resistor
-        r2 = (unsigned int) readADC(1); // get the value from the right resistor
-        r3 = (unsigned int) readADC(2); // get the value from the bottom resistor
-        r4 = (unsigned int) readADC(3); // get the value from the left resistor 
-        
-        if(r1 > r3) {
-            if(r2 > r4) {
-                sel2 = r1;
-                sel1 = r2;
-                rat = 0;
-            } else {
-                sel2 = r4;
-                sel1 = r1;
-                rat = 270;
+        for(x =0; x < 11; x ++ ){
+            values[x] = (unsigned int) readADC(x);
+        }
+        //r1 = (unsigned int) readADC(0); // get the value from the top resistor
+        highest = 0;
+        for( x = 0; x<8; x++) {
+            if(values[highest] < values[x]) {
+                highest = x;
             }
             
-        }else {
-            if(r2 > r4) {
-                sel2 = r2;
-                sel1 = r3;
-                rat = 90;
-            } else {
-                sel2 = r4;
-                sel1 = r3;
-                rat = 180;
-            }
+        }
+ 
+        if(highest == 0) {
+            low = 7;
+        } else {
+            low = highest - 1;
+        }
+        if(highest == 7) {
+            high = 0;
+        } else {
+            high = highest + 1;
         }
         
+        if(values[low] < values[high]) {
+            sel2 = values[high];
+            sel1 = values[highest];
+            rat = (highest ) * 45;
+            
+        } else {
+            sel1 = values[low];
+            sel2 = values[highest];
+            rat = (low ) * 45;
+        }
         // calculate angle 
-        result = (((double) sel1/sel2) * 45) + rat;
+        result = (((double) sel1/sel2) * 22.5) + rat;
+        
+        // calculate elevation
+        elevation =(double)(values[8]+values[9]+values[10])/3;
+        if(elevation > 2600) {
+            eleangle = 0;
+            plusFlag = 0;
+        }
+        else if(elevation > 2000) {
+            elevation -= 2000;
+            eleangle = ((600.0 - elevation)/600.0) * 8.0;
+            plusFlag = 0;
+        } else {
+            eleangle = 8;
+            plusFlag = 1;
+        }
         
         
-        ftoa(result, charResult , 3);
-        WriteString(2, 2, "angle: ", ON, OFF);
-        WriteString(50, 2, charResult , ON, OFF);
-        PlotCircle(95, 2, 2, ON);
-        //WriteString(93, 2, "deg", ON,OFF);
+        // display the angle 
+        ftoa(result, charResult , 3);    
+        if(result > 99.999) { // calculate the shift if the number is less than three decimals long
+            extraspace = 0;
+        } else {
+            extraspace = 11;
+        }
+        SetTextSize(2);
+        WriteString(24 + extraspace, 0, charResult , ON, OFF);
+        PlotFilledRectangle(103,0, 4, 4, ON);
+        
+        // display the elevation
+        ftoa(eleangle, charResult , 2);  
+        if(eleangle > 99.999) { // calculate the shift if the number is less than three decimals long
+            extraspace = 0;
+        } else if(eleangle > 9.999) {
+            extraspace = 11;
+        } else {
+            extraspace = 22;
+        }
+        SetTextSize(2);
+        WriteString(24 + extraspace, 18, charResult , ON, OFF);
+        PlotFilledRectangle(103 - 11 ,18, 2, 4, ON);
+        PlotFilledRectangle(106 - 11 ,18, 2, 4, ON);
+        if(plusFlag) {
+            WriteString(24 + 11, 18, "+" , ON, OFF);
+        }
         
         
+        // update the display
         OLED_UpdateDisplay();  
         OLED_ClearDisplay();
-        __delay_ms(100);
+        __delay_ms(5);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 

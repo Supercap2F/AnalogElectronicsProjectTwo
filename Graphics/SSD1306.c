@@ -103,6 +103,16 @@ void OLED_UpdateDisplay(void) {
 }
 
 void updateScrnBuff(unsigned char cmd, int x, int y) {
+    /*
+    unsigned int  NO_OF_BITS =  8; 
+    unsigned char reverse_num = 0; 
+    int i; 
+    for (i = 0; i < NO_OF_BITS; i++) 
+    { 
+        if((cmd & (1 << i))) 
+           reverse_num |= 1 << ((NO_OF_BITS - 1) - i);   
+    } 
+    */
     ScrnBuff[y][x] = cmd;
 }
 
